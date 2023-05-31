@@ -8,7 +8,8 @@
 SRC	=	src/strlen.asm \
 		src/strchr.asm \
 		src/memset.asm \
-		src/memcpy.asm
+		src/memcpy.asm \
+		src/strcmp.asm
 
 OBJ	=	$(SRC:.asm=.o)
 
@@ -19,7 +20,8 @@ NASM	=	nasm -f elf64
 TESTS	=	tests/test_strlen.c \
 			tests/test_strchr.c \
 			tests/test_memset.c \
-			tests/test_memcpy.c
+			tests/test_memcpy.c \
+			tests/test_strcmp.c
 
 TESTS_NAME	=	unit_tests
 
@@ -29,7 +31,7 @@ all: $(patsubst %.asm, %.o, $(SRC))
 	gcc -shared -o $(NAME) $(OBJ)
 
 %.o: %.asm
-	$(NASM) -o $@ $<
+	$(NASM) -DPIC -o $@ $<
 
 clean:
 	rm -f $(OBJ)

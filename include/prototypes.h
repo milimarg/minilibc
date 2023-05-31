@@ -13,5 +13,6 @@ size_t my_strlen(char *str);
 char *my_strchr(const char *str, int c);
 void *my_memset(void *s, int c, size_t n);
 void *my_memcpy(void *dest, const void *src, size_t n);
+int my_strcmp(const char *s1, const char *s2);
 
 #endif /*MY_H_*/
