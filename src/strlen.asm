@@ -3,6 +3,9 @@ BITS 64
 SECTION .text
 global my_strlen
 
+; size_t my_strlen(const char *s);
+; rax my_strlen(rdi);
+
 my_strlen:
 	mov r10, rdi ; on sauvegarde le pointeur du premier char pour pouvoir le return
 	jmp loop ; on va dans la loop
