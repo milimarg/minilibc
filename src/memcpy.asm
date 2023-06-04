@@ -6,19 +6,19 @@ SECTION .text
 ; rax my_memcpy(rdi, rsi, rdx);
 
 my_memcpy:
-    mov r10, rdi
-	jmp loop
+    MOV r10, rdi
+	JMP .loop
 
-loop:
-    cmp rdx, 0
-    je stop
-    mov al, BYTE [rsi]
-    mov BYTE [rdi], al
-    inc rdi
-    inc rsi
-    dec rdx
-    jmp loop
+.loop:
+    CMP rdx, 0
+    JE .stop
+    MOV al, BYTE [rsi]
+    MOV BYTE [rdi], al
+    INC rdi
+    INC rsi
+    DEC rdx
+    JMP .loop
 
-stop:
-    mov rax, r10
-    ret
+.stop:
+    MOV rax, r10
+    RET

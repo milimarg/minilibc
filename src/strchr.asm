@@ -6,20 +6,20 @@ SECTION .text
 ; rax my_strchr(rdi, rsi);
 
 my_strchr:
-	jmp loop
+	JMP loop
 
 loop:
-    cmp BYTE [rdi], 0 ; on compare le char actuel avec un \0
-    je stop ; si c'est \0 on quitte la boucle
-    cmp BYTE [rdi], sil ; on vérifie si le char actuel est égal au char donné
-    je stop_found ; si c'est le char donné, on quitte la boucle
-    inc rdi ; on incrémente le pointeur du char pour passer au suivant
-    jmp loop ; on revient dans la boucle
+    CMP BYTE [rdi], 0 ; on compare le char actuel avec un \0
+    JE stop ; si c'est \0 on quitte la boucle
+    CMP BYTE [rdi], sil ; on vérifie si le char actuel est égal au char donné
+    JE stop_found ; si c'est le char donné, on quitte la boucle
+    INC rdi ; on incrémente le pointeur du char pour passer au suivant
+    JMP loop ; on revient dans la boucle
 
 stop_found:
-    mov rax, rdi ; return le pointeur actuel
-	ret
+    MOV rax, rdi ; return le pointeur actuel
+	RET
 
 stop:
-   xor rax, rax ; return 0
-   ret
+   XOR rax, rax ; return 0
+   RET
