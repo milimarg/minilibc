@@ -2,10 +2,10 @@
 
 SECTION .text
 
-; int my_strcmp(const char *s1, const char *s2);
-; rax my_strcmp(rdi, rsi);
+; int strncmp(const char *s1, const char *s2, size_t n);
+; rax my_memcpy(rdi, rsi, rdx);
 
-my_strcmp:
+my_strncmp:
     XOR rcx, rcx
     XOR r10, r10
     XOR r11, r11
@@ -20,6 +20,8 @@ my_strcmp:
     CMP r10b, r11b
     JNE .stop
     INC rcx
+    CMP cl, dl
+    JE .stop
     JMP .loop
 
 .stop:

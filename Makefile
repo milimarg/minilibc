@@ -5,46 +5,51 @@
 ## Makefile
 ##
 
+NASM	=	nasm -f elf64
+CC	=	gcc
+NAME	=	libasm.so
+ASFLAGS	=	-Iinclude
+
 SRC	=	src/strlen.asm \
 		src/strchr.asm \
 		src/memset.asm \
 		src/memcpy.asm \
-		src/strcmp.asm
+		src/strcmp.asm \
+		src/strncmp.asm
 
 OBJ	=	$(SRC:.asm=.o)
-
-NAME	=	libasm.so
-
-NASM	=	nasm -f elf64
 
 TESTS	=	tests/test_strlen.c \
 			tests/test_strchr.c \
 			tests/test_memset.c \
 			tests/test_memcpy.c \
-			tests/test_strcmp.c
+			tests/test_strcmp.c \
+			tests/test_strncmp.c
 
 TESTS_NAME	=	unit_tests
 
 TESTS_OBJ	=	$(TESTS:.c=.o)
 
 all: $(patsubst %.asm, %.o, $(SRC))
-	gcc -shared -o $(NAME) $(OBJ)
+	$(CC) -shared -o $(NAME) $(OBJ)
 
 %.o: %.asm
-	$(NASM) -DPIC -o $@ $<
+	$(NASM) $(ASFLAGS) -o $@ $<
 
 clean:
 	rm -f $(OBJ)
+	rm -f $(TESTS_OBJ)
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(TESTS_NAME)
 
 re: fclean all
 
 tests: $(NAME)
 
 $(NAME): $(TESTS_OBJ)
-	gcc -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion -L. -lasm
+	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion -L. -lasm
 
 # mettre ça pour les unit tests : export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 

@@ -1,7 +1,6 @@
-BITS 64
+%include "lib.inc"
 
 SECTION .text
-global my_memcpy
 
 ; void *my_memcpy(void *dest, const void *src, size_t n);
 ; rax my_memcpy(rdi, rsi, rdx);

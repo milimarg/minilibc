@@ -1,7 +1,6 @@
-BITS 64
+%include "lib.inc"
 
 SECTION .text
-global my_strchr
 
 ; char *my_strchr(const char *str, int c);
 ; rax my_strchr(rdi, rsi);

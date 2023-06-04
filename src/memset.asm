@@ -1,7 +1,6 @@
-BITS 64
+%include "lib.inc"
 
 SECTION .text
-global my_memset
 
 ; void *my_memset(void *s, int c, size_t n);
 ; rax my_memset(rdi, rsi, rdx);
