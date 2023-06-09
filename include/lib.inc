@@ -6,3 +6,5 @@ GLOBAL my_memset:function
 GLOBAL my_strchr:function
 GLOBAL my_strcmp:function
 GLOBAL my_strncmp:function
+GLOBAL my_memmove:function
+GLOBAL my_rindex:function
