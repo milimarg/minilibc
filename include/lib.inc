@@ -8,3 +8,4 @@ GLOBAL my_strcmp:function
 GLOBAL my_strncmp:function
 GLOBAL my_memmove:function
 GLOBAL my_rindex:function
+GLOBAL my_strstr:function

@@ -17,5 +17,6 @@ int my_strcmp(const char *s1, const char *s2);
 int my_strncmp(const char *s1, const char *s2, size_t n);
 void *my_memmove(void *dest, const void *src, size_t n);
 char *my_rindex(const char *s, int c);
+char *my_strstr(const char *haystack, const char *needle);
 
 #endif /*MY_H_*/
