@@ -6,17 +6,17 @@ SECTION .text
 ; rax my_memset(rdi, rsi, rdx);
 
 my_memset:
-    MOV r10, rdi ; je déplace le pointeur pour le sauvegarder
-	JMP .loop
+    MOV r10, rdi ; The initial pointer is saved
+	JMP .loop ; Jump to the loop
 
 .loop:
-    CMP rdx, 0 ; je vérifie si le compteur est à 0
-    JE .stop ; si le compteur est à 0, je quitte
-    MOV [rdi], sil ; je copie le char donné dans le pointeur actuel
-    INC rdi ; j'ajoute 1 au pointeur, pour se déplacer
-    DEC rdx ; j'enlève 1 au compteur
-    JMP .loop ; je reviens au début de la boucle
+    CMP rdx, 0 ; Check if there are still characters to set values to
+    JE .stop ; If yes, break out of the loop
+    MOV [rdi], sil ; Copy the given character into the destination's pointer
+    INC rdi ; Get to the next destination pointer's address
+    DEC rdx ; Decrement rdx to get the remaining number of values to set values to
+    JMP .loop ; Repeat the loop
 
 .stop:
-    MOV rax, r10 ; je récupère le pointeur initial pour le return
+    MOV rax, r10 ; return the earlier backed up pointer
     RET

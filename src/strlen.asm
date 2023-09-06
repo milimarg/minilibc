@@ -6,16 +6,16 @@ SECTION .text
 ; rax my_strlen(rdi);
 
 my_strlen:
-	MOV r10, rdi ; on sauvegarde le pointeur du premier char pour pouvoir le return
-	JMP .loop ; on va dans la boucle
+	MOV r10, rdi ; The initial pointer is saved
+	JMP .loop ; Jump to the loop
 
 .loop:
-    CMP BYTE [rdi], 0 ; on compare le byte du pointeur actuel avec un \0
-    JE .stop ; si c'est un \0, on quitte la boucle
-    INC rdi ; on incrémente le pointeur pour passer au char suivant
-    JMP .loop ; on revient au début de la boucle
+    CMP BYTE [rdi], 0 ; Compare the current byte of the pointer to \0
+    JE .stop ; If it's a \0, get out of the loop
+    INC rdi ; Get to the next string pointer address
+    JMP .loop ; Repeat the loop
 
 .stop:
-    SUB rdi, r10 ; on soustrait le dernier pointeur avec celui du début pour récupérer la len
-    MOV rax, rdi ; on mets la soustraction dans rax pour return la valeur
+    SUB rdi, r10 ; Substract pointer of last character with earlier backed up pointer, to get the string's length
+    MOV rax, rdi ; Return length value
 	RET

@@ -6,20 +6,20 @@ SECTION .text
 ; rax my_strchr(rdi, rsi);
 
 my_strchr:
-	JMP loop
+	JMP loop ; Jump to loop
 
 loop:
-    CMP BYTE [rdi], 0 ; on compare le char actuel avec un \0
-    JE stop ; si c'est \0 on quitte la boucle
-    CMP BYTE [rdi], sil ; on vérifie si le char actuel est égal au char donné
-    JE stop_found ; si c'est le char donné, on quitte la boucle
-    INC rdi ; on incrémente le pointeur du char pour passer au suivant
-    JMP loop ; on revient dans la boucle
+    CMP BYTE [rdi], 0 ; Compare current pointer's value with 0
+    JE stop ; If yes, get out of the loop
+    CMP BYTE [rdi], sil ; Check if current pointer's value is equal to given character
+    JE stop_found ; If yes, go to stop_found
+    INC rdi ; Get to the next string pointer address
+    JMP loop ; Repeat the loop
 
 stop_found:
-    MOV rax, rdi ; return le pointeur actuel
+    MOV rax, rdi ; Return the current pointer
 	RET
 
 stop:
-   XOR rax, rax ; return 0
+   XOR rax, rax ; Set rax to 0 (aka NULL in that context)
    RET
