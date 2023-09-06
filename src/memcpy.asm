@@ -10,7 +10,7 @@ my_memcpy:
 	JMP .loop ; Jump to the loop
 
 .loop:
-    CMP rdx, 0 ; Check if there are still characters to copy
+    CMP rdx, 0 ; Check if there are no characters to copy
     JE .stop ; If yes, break out of the loop
     MOV al, BYTE [rsi] ; Copy byte of current value pointer into al register, to get the value
     MOV BYTE [rdi], al ; Copy value into rdi register, to get its pointer and put it in the destination slot
