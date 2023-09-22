@@ -22,7 +22,8 @@ TESTS	=	tests/test_strlen.c \
 			tests/test_strcmp.c \
 			tests/test_strncmp.c \
 			tests/test_rindex.c \
-			tests/test_strstr.c
+			tests/test_strstr.c \
+			tests/test_memmove.c
 
 TESTS_NAME	=	unit_tests
 
