@@ -1,10 +1,3 @@
-##
-## EPITECH PROJECT, 2023
-## minilibc
-## File description:
-## Makefile
-##
-
 NASM	=	nasm -f elf64
 CC	=	gcc
 NAME	=	libasm.so
@@ -56,6 +49,6 @@ tests: $(NAME)
 $(NAME): $(TESTS_OBJ)
 	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion -L. -lasm
 
-# mettre ça pour les unit tests : export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+# type that for unit tests : export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
 .PHONY: all clean fclean re tests

@@ -2,4 +2,3 @@
 *.out
 *.so
 unit_tests
-tests/
