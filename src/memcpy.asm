@@ -6,7 +6,7 @@ SECTION .text
 ; rax my_memcpy(rdi, rsi, rdx);
 
 my_memcpy:
-    MOV r10, rdi ; The initial pointer is saved
+    MOV r8, rdi ; The initial pointer is saved
 	JMP .loop ; Jump to the loop
 
 .loop:
@@ -20,5 +20,5 @@ my_memcpy:
     JMP .loop ; Repeat the loop
 
 .stop:
-    MOV rax, r10 ; return the earlier backed up pointer
+    MOV rax, r8 ; return the earlier backed up pointer
     RET

@@ -6,7 +6,7 @@ SECTION .text
 ; rax my_strlen(rdi);
 
 my_strlen:
-	MOV r10, rdi ; The initial pointer is saved
+	MOV r8, rdi ; The initial pointer is saved
 	JMP .loop ; Jump to the loop
 
 .loop:
@@ -16,6 +16,6 @@ my_strlen:
     JMP .loop ; Repeat the loop
 
 .stop:
-    SUB rdi, r10 ; Substract pointer of last character with earlier backed up pointer, to get the string's length
+    SUB rdi, r8 ; Subtract pointer of last character with earlier backed up pointer, to get the string's length
     MOV rax, rdi ; Return length value
 	RET
