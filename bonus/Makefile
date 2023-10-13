@@ -3,12 +3,18 @@ CC	=	gcc
 NAME	=	libasm.so
 
 SRC	=	src/strlen.s \
-		src/memcpy.s
+		src/memcpy.s \
+		src/memset.s \
+		src/rindex.s \
+		src/strstr.s
 
 OBJ	=	$(SRC:.s=.o)
 
-TESTS	=	tests/test_strlen.c \
-		tests/test_memcpy.c
+TESTS	=	../tests/test_strlen.c \
+		../tests/test_memcpy.c \
+		../tests/test_memset.c \
+		../tests/test_rindex.c \
+		../tests/test_strstr.c
 
 TESTS_NAME	=	unit_tests
 
@@ -35,6 +41,6 @@ tests: $(NAME)
 $(NAME): $(TESTS_OBJ)
 	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion -L. -lasm
 
-# type that for unit tests : export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+# type that for unit tests : export LD_LIBRARY_PATH=$(find /usr -name "libcriterion.so.3" | head -n 1):$LD_LIBRARY_PATH
 
 .PHONY: all clean fclean re tests

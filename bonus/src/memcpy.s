@@ -12,8 +12,6 @@ my_memcpy:
     BEQ .stop @ If yes, break out of the loop
     LDRB r4, [r1]
     STRB r4, [r0]
-    @MOV al, BYTE [rsi] @ Copy byte of current value pointer into al register, to get the value
-    @MOV BYTE [rdi], al @ Copy value into rdi register, to get its pointer and put it in the destination slot
     ADD r0, r0, #1 @ Get to the next destination pointer address
     ADD r1, r1, #1 @ Get to the next source pointer address
     SUB r2, r2, #1 @ Decrement rdx to get the remaining number of values to copy
