@@ -2,11 +2,13 @@ NASM	=	as
 CC	=	gcc
 NAME	=	libasm.so
 
-SRC	=	src/strlen.s
+SRC	=	src/strlen.s \
+		src/memcpy.s
 
 OBJ	=	$(SRC:.s=.o)
 
-TESTS	=	tests/test_strlen.c
+TESTS	=	tests/test_strlen.c \
+		tests/test_memcpy.c
 
 TESTS_NAME	=	unit_tests
 
