@@ -1,11 +1,11 @@
-%include "lib.inc"
+global _my_memset
 
 SECTION .text
 
 ; void *my_memset(void *s, int c, size_t n);
 ; rax my_memset(rdi, rsi, rdx);
 
-my_memset:
+_my_memset:
     MOV r8, rdi ; The initial pointer is saved
 	JMP .loop ; Jump to the loop
 

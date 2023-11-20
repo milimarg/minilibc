@@ -1,11 +1,11 @@
-%include "lib.inc"
+global _my_rindex
 
 SECTION .text
 
 ; char *my_rindex(const char *s, int c);
 ; rax my_rindex(rdi, rsi);
 
-my_rindex:
+_my_rindex:
     XOR rax, rax ; set rax to 0
 	JMP .loop ; Jump to the loop
 

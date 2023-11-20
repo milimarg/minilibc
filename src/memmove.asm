@@ -1,11 +1,11 @@
-%include "lib.inc"
+global _my_memmove
 
 SECTION .text
 
 ; void *my_memmove(void *dest, const void *src, size_t n);
 ; rax my_memcpy(rdi, rsi, rdx);
 
-my_memmove:
+_my_memmove:
     MOV r10, r9 ; The initial pointer is saved
     MOV r11, rdx ; Save size to count values twice
 	JMP .buffer_loop ; Jump to the loop

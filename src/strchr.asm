@@ -1,11 +1,11 @@
-%include "lib.inc"
+global _my_strchr
 
 SECTION .text
 
 ; char *my_strchr(const char *str, int c);
 ; rax my_strchr(rdi, rsi);
 
-my_strchr:
+_my_strchr:
 	JMP loop ; Jump to loop
 
 loop:

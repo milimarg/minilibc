@@ -1,4 +1,4 @@
-NASM	=	nasm -f elf64
+NASM	=	nasm -f macho64
 CC	=	gcc
 NAME	=	libasm.so
 ASFLAGS	=	-Iinclude
@@ -11,7 +11,8 @@ SRC	=	src/strlen.asm \
 		src/strncmp.asm \
 		src/memmove.asm \
 		src/rindex.asm \
-		src/strstr.asm
+		src/strstr.asm \
+		src/strpbrk.asm
 
 OBJ	=	$(SRC:.asm=.o)
 
@@ -26,11 +27,11 @@ TESTS	=	tests/test_strlen.c \
 			tests/test_memmove.c
 
 TESTS_NAME	=	unit_tests
-
 TESTS_OBJ	=	$(TESTS:.c=.o)
+CFLAGS	=	-arch x86_64 -I/opt/homebrew/Cellar/criterion/2.4.1_3/include
 
 all: $(patsubst %.asm, %.o, $(SRC))
-	$(CC) -shared -o $(NAME) $(OBJ)
+	$(CC) -arch x86_64 -shared -o $(NAME) $(OBJ)
 
 %.o: %.asm
 	$(NASM) $(ASFLAGS) -o $@ $<
@@ -48,7 +49,7 @@ re: fclean all
 tests: $(NAME)
 
 $(NAME): $(TESTS_OBJ)
-	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion -L. -lasm
+	$(CC) -arch x86_64 -o $(TESTS_NAME) $(TESTS_OBJ) -L/opt/homebrew/Cellar/criterion/2.4.1_3/lib -lcriterion -L. -lasm
 
 # type that for unit tests : export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 

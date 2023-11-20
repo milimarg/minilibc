@@ -2,5 +2,6 @@
 *.out
 *.so
 *.o
+*.log
 unit_tests
 test

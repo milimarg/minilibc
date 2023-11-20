@@ -1,11 +1,11 @@
-%include "lib.inc"
+global _my_memcpy
 
 SECTION .text
 
 ; void *my_memcpy(void *dest, const void *src, size_t n);
 ; rax my_memcpy(rdi, rsi, rdx);
 
-my_memcpy:
+_my_memcpy:
     MOV r8, rdi ; The initial pointer is saved
 	JMP .loop ; Jump to the loop
 

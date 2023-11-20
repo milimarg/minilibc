@@ -1,11 +1,11 @@
-%include "lib.inc"
+global _my_strstr
 
 SECTION .text
 
 ; char *my_strstr(const char *haystack, const char *needle);
 ; rax my_strstr(rdi, rsi);
 
-my_strstr:
+_my_strstr:
     XOR rax, rax ; Set rax to 0
 	JMP .loop ; Jump into the loop
 

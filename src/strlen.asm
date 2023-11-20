@@ -1,11 +1,11 @@
-%include "lib.inc"
+global _my_strlen
 
 SECTION .text
 
 ; size_t my_strlen(const char *s);
 ; rax my_strlen(rdi);
 
-my_strlen:
+_my_strlen:
 	MOV r8, rdi ; The initial pointer is saved
 	JMP .loop ; Jump to the loop
 
