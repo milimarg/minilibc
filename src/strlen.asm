@@ -1,11 +1,13 @@
-global _my_strlen
+global my_strlen
 
 SECTION .text
 
 ; size_t my_strlen(const char *s);
 ; rax my_strlen(rdi);
 
-_my_strlen:
+my_strlen:
+_strlen:
+strlen:
 	MOV r8, rdi ; The initial pointer is saved
 	JMP .loop ; Jump to the loop
 

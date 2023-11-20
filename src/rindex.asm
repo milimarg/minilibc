@@ -1,11 +1,13 @@
-global _my_rindex
+global my_rindex
 
 SECTION .text
 
 ; char *my_rindex(const char *s, int c);
 ; rax my_rindex(rdi, rsi);
 
-_my_rindex:
+my_rindex:
+_rindex:
+rindex:
     XOR rax, rax ; set rax to 0
 	JMP .loop ; Jump to the loop
 

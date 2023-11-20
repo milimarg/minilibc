@@ -1,6 +1,11 @@
 #ifndef MY_H_
     #define MY_H_
     #include <stdio.h>
+    #include <string.h>
+    #include <stdlib.h>
+    #include <dlfcn.h>
+    #include <criterion/criterion.h>
+    #define LIBRARY_PATH "./libasm.so"
 
 size_t my_strlen(char *str);
 char *my_strchr(const char *str, int c);

@@ -1,11 +1,13 @@
-global _my_strstr
+global my_strstr
 
 SECTION .text
 
 ; char *my_strstr(const char *haystack, const char *needle);
 ; rax my_strstr(rdi, rsi);
 
-_my_strstr:
+my_strstr:
+_strstr:
+strstr:
     XOR rax, rax ; Set rax to 0
 	JMP .loop ; Jump into the loop
 

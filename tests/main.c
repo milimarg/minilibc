@@ -1,6 +1,4 @@
 #include "../include/prototypes.h"
-#include <string.h>
-#include <stdlib.h>
 
 /*
 int main(void)
@@ -19,8 +17,8 @@ int main(void)
 
 int main(void)
 {
-    char *original_res = strpbrk("hello world", "dlo");
-    char *my_res = my_strpbrk("hello world", "dlo");
+    const char *original_res = strpbrk("", "");
+    char *my_res = my_strpbrk("", "");
 
     printf("original = %s\n", original_res);
     printf("my = %s\n", my_res);

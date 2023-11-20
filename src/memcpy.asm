@@ -1,11 +1,13 @@
-global _my_memcpy
+global my_memcpy
 
 SECTION .text
 
 ; void *my_memcpy(void *dest, const void *src, size_t n);
 ; rax my_memcpy(rdi, rsi, rdx);
 
-_my_memcpy:
+my_memcpy:
+_memcpy:
+memcpy:
     MOV r8, rdi ; The initial pointer is saved
 	JMP .loop ; Jump to the loop
 

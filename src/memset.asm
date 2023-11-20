@@ -1,11 +1,13 @@
-global _my_memset
+global my_memset
 
 SECTION .text
 
 ; void *my_memset(void *s, int c, size_t n);
 ; rax my_memset(rdi, rsi, rdx);
 
-_my_memset:
+my_memset:
+_memset:
+memset:
     MOV r8, rdi ; The initial pointer is saved
 	JMP .loop ; Jump to the loop
 

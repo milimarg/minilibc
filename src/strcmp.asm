@@ -1,11 +1,13 @@
-global _my_strcmp
+global my_strcmp
 
 SECTION .text
 
 ; int my_strcmp(const char *s1, const char *s2);
 ; rax my_strcmp(rdi, rsi);
 
-_my_strcmp:
+my_strcmp:
+_strcmp:
+strcmp:
     XOR rcx, rcx ; Set rcx to 0
     XOR r8, r8 ; Set r8 to 0
     XOR r9, r9 ; Set r9 to 0

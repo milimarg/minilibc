@@ -1,5 +1,3 @@
-#include <string.h>
-#include <criterion/criterion.h>
 #include "../include/prototypes.h"
 
 Test(my_rindex, empty_string) {
