@@ -1,3 +1,4 @@
+BITS 64
 global _memset
 global memset
 
@@ -8,17 +9,18 @@ SECTION .text
 
 _memset:
 memset:
-    MOV r8, rdi ; The initial pointer is saved
-	JMP .loop ; Jump to the loop
+    PUSH rdi ; The initial pointer is saved
+	JMP loop ; Jump to the loop
 
-.loop:
+loop:
     CMP rdx, 0 ; Check if there are still characters to set values to
-    JE .stop ; If yes, break out of the loop
+    JE stop ; If yes, break out of the loop
     MOV [rdi], sil ; Copy the given character into the destination's pointer
     INC rdi ; Get to the next destination pointer's address
     DEC rdx ; Decrement rdx to get the remaining number of values to set values to
-    JMP .loop ; Repeat the loop
+    JMP loop ; Repeat the loop
 
-.stop:
-    MOV rax, r8 ; return the earlier backed up pointer
+stop:
+    POP rdi
+    MOV rax, rdi ; return the earlier backed up pointer
     RET

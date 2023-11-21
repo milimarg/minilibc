@@ -1,3 +1,4 @@
+BITS 64
 global _strcspn
 global strcspn
 
@@ -10,6 +11,6 @@ SECTION .text
 
 _strcspn:
 strcspn:
-    CALL strpbrk
-    SUB rax, rdi
-    RET
+    CALL strpbrk ; call strpbrk
+    SUB rax, rdi ; subtract returned ptr to src ptr to get actual index
+    RET ; return index

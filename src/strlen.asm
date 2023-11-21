@@ -1,3 +1,4 @@
+BITS 64
 global _strlen
 global strlen
 
@@ -8,16 +9,15 @@ SECTION .text
 
 _strlen:
 strlen:
-	MOV r8, rdi ; The initial pointer is saved
-	JMP .loop ; Jump to the loop
+	MOV rax, rdi ; The initial pointer is saved
+	JMP loop ; Jump to the loop
 
-.loop:
-    CMP BYTE [rdi], 0 ; Compare the current byte of the pointer to \0
-    JE .stop ; If it's a \0, get out of the loop
-    INC rdi ; Get to the next string pointer address
-    JMP .loop ; Repeat the loop
+loop:
+    CMP BYTE [rax], 0 ; Compare the current byte of the pointer to \0
+    JE stop ; If it's a \0, get out of the loop
+    INC rax ; Get to the next string pointer address
+    JMP loop ; Repeat the loop
 
-.stop:
-    SUB rdi, r8 ; Subtract pointer of last character with earlier backed up pointer, to get the string's length
-    MOV rax, rdi ; Return length value
+stop:
+    SUB rax, rdi ; Subtract pointer of last character with earlier backed up pointer, to get the string's length
 	RET

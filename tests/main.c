@@ -51,22 +51,11 @@ int main(void)
 {
     setup();
 
-    int original_res = strcasecmp("Hey", "heY");
-    int my_res = my_strcasecmp("Hey", "heY");
+    int original_res = strlen("hello world!");
+    int my_res = my_strlen("hello world!");
 
     printf("original = %d\n", original_res);
     printf("my = %d\n", my_res);
     teardown();
     return (0);
 }
-
-/*
- * char *original_res = malloc(sizeof(char) * 6);
-    char *my_res = malloc(sizeof(char) * 6);
-
-    original_res = memcpy(original_res, "ahahah", 6);
-    my_res = memcpy(my_res, "ahahah", 6);
-
-    printf("original = %s\n", original_res);
-    printf("my = %s\n", my_res);
- */
