@@ -41,6 +41,6 @@ tests: $(NAME)
 $(NAME): $(TESTS_OBJ)
 	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion -L. -lasm
 
-# type that for unit tests : export LD_LIBRARY_PATH=$(find /usr -name "libcriterion.so.3" | head -n 1):$LD_LIBRARY_PATH
+# type that for unit tests : export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
 .PHONY: all clean fclean re tests

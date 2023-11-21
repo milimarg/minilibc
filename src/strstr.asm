@@ -26,10 +26,10 @@ strstr:
     JMP .needle_loop ; Jump to needle_loop
 
 .needle_loop:
-    CMP BYTE [r9], 0 ; Compare haystack pointer's value to \0
-    JE .needle_exit ; If yes, go to needle_exit
-    CMP BYTE [r8], 0 ; Compare needle pointer's value to \0
-    JE .stop ; If yes, get out of the loop
+    CMP BYTE [r8], 0 ; Compare haystack pointer's value to \0
+    JE .stop ; If yes, go to needle_exit
+    CMP BYTE [r9], 0 ; Compare needle pointer's value to \0
+    JE .needle_exit ; If yes, get out of the loop
     MOV bl, [r8] ; Copy current haystack pointer's value into bl, to get directly the character value
     MOV cl, [r9] ; Copy current needle pointer's value into cl, to get directly the character value
     CMP bl, cl ; Compare both characters value

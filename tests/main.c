@@ -20,6 +20,10 @@ void *lib = NULL;
 void setup()
 {
     lib = dlopen(LIBRARY_PATH, RTLD_LAZY);
+    if (lib == NULL) {
+        printf("Cannot open lib: lib not found");
+        return;
+    }
     my_strlen = dlsym(lib, "strlen");
     my_strchr = dlsym(lib, "strchr");
     my_memset = dlsym(lib, "memset");
@@ -31,6 +35,7 @@ void setup()
     my_strstr = dlsym(lib, "strstr");
     my_strpbrk = dlsym(lib, "strpbrk");
     my_strcspn = dlsym(lib, "strcspn");
+    my_strcasecmp = dlsym(lib, "strcasecmp");
 }
 
 void teardown()
@@ -45,12 +50,23 @@ void teardown()
 int main(void)
 {
     setup();
-    const char *str = "aeiou";
-    size_t original_res = strcspn(str, "zdjkdjkdsjko");
-    size_t my_res = my_strcspn(str, "zdjkdjkdsjko");
 
-    printf("original = %ld\n", original_res);
-    printf("my = %ld\n", my_res);
+    int original_res = strcasecmp("Hey", "heY");
+    int my_res = my_strcasecmp("Hey", "heY");
+
+    printf("original = %d\n", original_res);
+    printf("my = %d\n", my_res);
     teardown();
     return (0);
 }
+
+/*
+ * char *original_res = malloc(sizeof(char) * 6);
+    char *my_res = malloc(sizeof(char) * 6);
+
+    original_res = memcpy(original_res, "ahahah", 6);
+    my_res = memcpy(my_res, "ahahah", 6);
+
+    printf("original = %s\n", original_res);
+    printf("my = %s\n", my_res);
+ */
