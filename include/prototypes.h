@@ -17,5 +17,6 @@ void *(*my_memmove)(void *dest, const void *src, size_t n);
 char *(*my_rindex)(const char *s, int c);
 char *(*my_strstr)(const char *haystack, const char *needle);
 char *(*my_strpbrk)(const char *s, const char *charset);
+size_t (*my_strcspn)(const char *s, const char *charset);
 
 #endif /*MY_H_*/

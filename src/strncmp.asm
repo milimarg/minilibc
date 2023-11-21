@@ -4,7 +4,7 @@ global strncmp
 SECTION .text
 
 ; int strncmp(const char *s1, const char *s2, size_t n);
-; rax my_memcpy(rdi, rsi, rdx);
+; rax strncmp(rdi, rsi, rdx);
 
 _strncmp:
 strncmp:

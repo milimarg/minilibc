@@ -3,8 +3,8 @@ global strchr
 
 SECTION .text
 
-; char *my_strchr(const char *str, int c);
-; rax my_strchr(rdi, rsi);
+; char *strchr(const char *str, int c);
+; rax strchr(rdi, rsi);
 
 _strchr:
 strchr:

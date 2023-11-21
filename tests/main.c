@@ -30,6 +30,7 @@ void setup()
     my_rindex = dlsym(lib, "rindex");
     my_strstr = dlsym(lib, "strstr");
     my_strpbrk = dlsym(lib, "strpbrk");
+    my_strcspn = dlsym(lib, "strcspn");
 }
 
 void teardown()
@@ -44,11 +45,12 @@ void teardown()
 int main(void)
 {
     setup();
-    const char *original_res = strpbrk("", "");
-    char *my_res = my_strpbrk("", "");
+    const char *str = "aeiou";
+    size_t original_res = strcspn(str, "zdjkdjkdsjko");
+    size_t my_res = my_strcspn(str, "zdjkdjkdsjko");
 
-    printf("original = %s\n", original_res);
-    printf("my = %s\n", my_res);
+    printf("original = %ld\n", original_res);
+    printf("my = %ld\n", my_res);
     teardown();
     return (0);
 }

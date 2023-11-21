@@ -3,8 +3,8 @@ global rindex
 
 SECTION .text
 
-; char *my_rindex(const char *s, int c);
-; rax my_rindex(rdi, rsi);
+; char *rindex(const char *s, int c);
+; rax rindex(rdi, rsi);
 
 _rindex:
 rindex:

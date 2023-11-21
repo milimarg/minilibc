@@ -3,8 +3,8 @@ global strcmp
 
 SECTION .text
 
-; int my_strcmp(const char *s1, const char *s2);
-; rax my_strcmp(rdi, rsi);
+; int strcmp(const char *s1, const char *s2);
+; rax strcmp(rdi, rsi);
 
 _strcmp:
 strcmp:

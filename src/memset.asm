@@ -3,8 +3,8 @@ global memset
 
 SECTION .text
 
-; void *my_memset(void *s, int c, size_t n);
-; rax my_memset(rdi, rsi, rdx);
+; void *memset(void *s, int c, size_t n);
+; rax memset(rdi, rsi, rdx);
 
 _memset:
 memset:

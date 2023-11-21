@@ -3,8 +3,8 @@ global strlen
 
 SECTION .text
 
-; size_t my_strlen(const char *s);
-; rax my_strlen(rdi);
+; size_t strlen(const char *s);
+; rax strlen(rdi);
 
 _strlen:
 strlen:

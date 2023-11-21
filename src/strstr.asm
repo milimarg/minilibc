@@ -3,8 +3,8 @@ global strstr
 
 SECTION .text
 
-; char *my_strstr(const char *haystack, const char *needle);
-; rax my_strstr(rdi, rsi);
+; char *strstr(const char *haystack, const char *needle);
+; rax strstr(rdi, rsi);
 
 _strstr:
 strstr:

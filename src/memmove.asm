@@ -3,8 +3,8 @@ global memmove
 
 SECTION .text
 
-; void *my_memmove(void *dest, const void *src, size_t n);
-; rax my_memcpy(rdi, rsi, rdx);
+; void *memmove(void *dest, const void *src, size_t n);
+; rax memmove(rdi, rsi, rdx);
 
 _memmove:
 memmove:
