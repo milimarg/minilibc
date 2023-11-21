@@ -1,11 +1,11 @@
-global my_strchr
+global _strchr
+global strchr
 
 SECTION .text
 
 ; char *my_strchr(const char *str, int c);
 ; rax my_strchr(rdi, rsi);
 
-my_strchr:
 _strchr:
 strchr:
 	JMP loop ; Jump to loop

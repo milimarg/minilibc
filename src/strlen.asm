@@ -1,11 +1,11 @@
-global my_strlen
+global _strlen
+global strlen
 
 SECTION .text
 
 ; size_t my_strlen(const char *s);
 ; rax my_strlen(rdi);
 
-my_strlen:
 _strlen:
 strlen:
 	MOV r8, rdi ; The initial pointer is saved

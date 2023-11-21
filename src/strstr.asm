@@ -1,11 +1,11 @@
-global my_strstr
+global _strstr
+global strstr
 
 SECTION .text
 
 ; char *my_strstr(const char *haystack, const char *needle);
 ; rax my_strstr(rdi, rsi);
 
-my_strstr:
 _strstr:
 strstr:
     XOR rax, rax ; Set rax to 0

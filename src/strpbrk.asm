@@ -1,11 +1,11 @@
-global my_strpbrk
+global _strpbrk
+global strpbrk
 
 SECTION .text
 
 ; char *strpbrk(const char *s, const char *charset);
 ; rax strpbrk(rdi, rsi);
 
-my_strpbrk:
 _strpbrk:
 strpbrk:
 	JMP .loop ; Jump to the loop

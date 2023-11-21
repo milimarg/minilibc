@@ -1,11 +1,11 @@
-global my_memcpy
+global _memcpy
+global memcpy
 
 SECTION .text
 
 ; void *my_memcpy(void *dest, const void *src, size_t n);
 ; rax my_memcpy(rdi, rsi, rdx);
 
-my_memcpy:
 _memcpy:
 memcpy:
     MOV r8, rdi ; The initial pointer is saved

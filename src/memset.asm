@@ -1,11 +1,11 @@
-global my_memset
+global _memset
+global memset
 
 SECTION .text
 
 ; void *my_memset(void *s, int c, size_t n);
 ; rax my_memset(rdi, rsi, rdx);
 
-my_memset:
 _memset:
 memset:
     MOV r8, rdi ; The initial pointer is saved

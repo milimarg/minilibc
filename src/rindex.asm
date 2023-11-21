@@ -1,11 +1,11 @@
-global my_rindex
+global _rindex
+global rindex
 
 SECTION .text
 
 ; char *my_rindex(const char *s, int c);
 ; rax my_rindex(rdi, rsi);
 
-my_rindex:
 _rindex:
 rindex:
     XOR rax, rax ; set rax to 0
