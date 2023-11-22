@@ -36,6 +36,7 @@ void setup()
     my_strpbrk = dlsym(lib, "strpbrk");
     my_strcspn = dlsym(lib, "strcspn");
     my_strcasecmp = dlsym(lib, "strcasecmp");
+    my_strfry = dlsym(lib, "strfry");
 }
 
 void teardown()
@@ -51,10 +52,10 @@ int main(void)
 {
     setup();
 
-    int original_res = strlen("hello world!");
-    int my_res = my_strlen("hello world!");
+    //int original_res = strlen("hello world!");
+    int my_res = my_strfry("hello world!");
 
-    printf("original = %d\n", original_res);
+    //printf("original = %d\n", original_res);
     printf("my = %d\n", my_res);
     teardown();
     return (0);

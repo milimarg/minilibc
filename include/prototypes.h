@@ -19,5 +19,6 @@ char *(*my_strstr)(const char *haystack, const char *needle);
 char *(*my_strpbrk)(const char *s, const char *charset);
 size_t (*my_strcspn)(const char *s, const char *charset);
 int (*my_strcasecmp)(const char *s1, const char *s2);
+int (*my_strfry)(char *string);
 
 #endif /*MY_H_*/
