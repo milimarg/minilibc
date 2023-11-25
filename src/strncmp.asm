@@ -1,4 +1,4 @@
-global my_strncmp
+BITS 64
 global strncmp
 
 SECTION .text
@@ -6,7 +6,6 @@ SECTION .text
 ; int strncmp(const char *s1, const char *s2, size_t n);
 ; rax strncmp(rdi, rsi, rdx);
 
-my_strncmp:
 strncmp:
     XOR rcx, rcx ; Set rcx to 0
     XOR r8, r8 ; Set r8 to 0

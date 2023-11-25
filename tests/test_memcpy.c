@@ -1,6 +1,6 @@
 #include "../include/prototypes.h"
 
-Test(my_memcpy, copy_empty_string)
+Test(my_memcpy, copy_empty_string, .init = setup, .fini = teardown)
 {
     int len = 1;
     char *my_result = malloc(sizeof(char) * len);
@@ -8,11 +8,10 @@ Test(my_memcpy, copy_empty_string)
 
     my_result = my_memcpy(my_result, "", len);
     original_result = memcpy(original_result, "", len);
-    for (int i = 0; i < len; i++)
-        cr_assert_eq(original_result[i], my_result[i]);
+    cr_assert_str_eq(original_result, my_result);
 }
 
-Test(my_memcpy, copy_filled_string)
+Test(my_memcpy, copy_filled_string, .init = setup, .fini = teardown)
 {
     int len = 12;
     char *my_result = malloc(sizeof(char) * len);
@@ -20,11 +19,10 @@ Test(my_memcpy, copy_filled_string)
 
     my_result = my_memcpy(my_result, "hello world!", len);
     original_result = memcpy(original_result, "hello world!", len);
-    for (int i = 0; i < len; i++)
-        cr_assert_eq(original_result[i], my_result[i]);
+    cr_assert_str_eq(original_result, my_result);
 }
 
-Test(my_memcpy, given_len_lower_than_src_len)
+Test(my_memcpy, given_len_lower_than_src_len, .init = setup, .fini = teardown)
 {
     int len = 5;
     char *my_result = malloc(sizeof(char) * len);
@@ -32,11 +30,10 @@ Test(my_memcpy, given_len_lower_than_src_len)
 
     my_result = my_memcpy(my_result, "hello world!", len);
     original_result = memcpy(original_result, "hello world!", len);
-    for (int i = 0; i < len; i++)
-        cr_assert_eq(original_result[i], my_result[i]);
+    cr_assert_str_eq(original_result, my_result);
 }
 
-Test(my_memcpy, given_len_greater_than_src_len)
+Test(my_memcpy, given_len_greater_than_src_len, .init = setup, .fini = teardown)
 {
     int len = 20;
     char *my_result = malloc(sizeof(char) * len);
@@ -44,6 +41,5 @@ Test(my_memcpy, given_len_greater_than_src_len)
 
     my_result = my_memcpy(my_result, "hello world!", len);
     original_result = memcpy(original_result, "hello world!", len);
-    for (int i = 0; i < len; i++)
-        cr_assert_eq(original_result[i], my_result[i]);
+    cr_assert_str_eq(original_result, my_result);
 }

@@ -1,4 +1,4 @@
-#include "../include/prototypes.h"
+#include "include/prototypes.h"
 
 /*
 int main(void)

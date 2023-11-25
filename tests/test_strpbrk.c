@@ -1,75 +1,70 @@
 #include "../include/prototypes.h"
 
-Test(my_memcpy, empty_strings)
+Test(my_strpbrk, empty_strings, .init = setup, .fini = teardown)
 {
     const char *str = "";
-    const char *original_res = strpbrk(str, str);
+    char *original_res = strpbrk(str, str);
     char *my_res = my_strpbrk(str, str);
 
     cr_assert_eq(original_res, my_res);
 }
 
-Test(my_memcpy, no_match)
+Test(my_strpbrk, no_match, .init = setup, .fini = teardown)
 {
     const char *str1 = "abcdef";
     const char *str2 = "xyz";
-    const char *original_res = strpbrk(str1, str2);
+    char *original_res = strpbrk(str1, str2);
     char *my_res = my_strpbrk(str1, str2);
 
     cr_assert_eq(original_res, my_res);
 }
 
-Test(my_memcpy, match_at_beginning)
+Test(my_strpbrk, match_at_beginning, .init = setup, .fini = teardown)
 {
     const char *str1 = "abcdef";
     const char *str2 = "axz";
-    const char *original_res = strpbrk(str1, str2);
+    char *original_res = strpbrk(str1, str2);
     char *my_res = my_strpbrk(str1, str2);
 
-    for (int i = 0; i < original_res[i] != '\0'; i++)
-        cr_assert_eq(original_res[i], my_res[i]);
+    cr_assert_str_eq(original_res, my_res);
 }
 
-Test(my_memcpy, match_at_end)
+Test(my_strpbrk, match_at_end, .init = setup, .fini = teardown)
 {
     const char *str1 = "abcdef";
     const char *str2 = "xyzf";
-    const char *original_res = strpbrk(str1, str2);
+    char *original_res = strpbrk(str1, str2);
     char *my_res = my_strpbrk(str1, str2);
 
-    for (int i = 0; i < original_res[i] != '\0'; i++)
-        cr_assert_eq(original_res[i], my_res[i]);
+    cr_assert_str_eq(original_res, my_res);
 }
 
-Test(my_memcpy, match_at_middle)
+Test(my_strpbrk, match_at_middle, .init = setup, .fini = teardown)
 {
     const char *str1 = "abcdef";
     const char *str2 = "xyzc";
-    const char *original_res = strpbrk(str1, str2);
+    char *original_res = strpbrk(str1, str2);
     char *my_res = my_strpbrk(str1, str2);
 
-    for (int i = 0; i < original_res[i] != '\0'; i++)
-        cr_assert_eq(original_res[i], my_res[i]);
+    cr_assert_str_eq(original_res, my_res);
 }
 
-Test(my_memcpy, multiple_matches)
+Test(my_strpbrk, multiple_matches, .init = setup, .fini = teardown)
 {
     const char *str1 = "abcdef";
     const char *str2 = "xcdfzb";
-    const char *original_res = strpbrk(str1, str2);
+    char *original_res = strpbrk(str1, str2);
     char *my_res = my_strpbrk(str1, str2);
 
-    for (int i = 0; i < original_res[i] != '\0'; i++)
-        cr_assert_eq(original_res[i], my_res[i]);
+    cr_assert_str_eq(original_res, my_res);
 }
 
-Test(my_memcpy, single_match_with_duplicates)
+Test(my_strpbrk, single_match_with_duplicates, .init = setup, .fini = teardown)
 {
     const char *str1 = "aabbcc";
     const char *str2 = "abc";
-    const char *original_res = strpbrk(str1, str2);
+    char *original_res = strpbrk(str1, str2);
     char *my_res = my_strpbrk(str1, str2);
 
-    for (int i = 0; i < original_res[i] != '\0'; i++)
-        cr_assert_eq(original_res[i], my_res[i]);
+    cr_assert_str_eq(original_res, my_res);
 }

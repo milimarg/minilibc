@@ -1,5 +1,4 @@
 BITS 64
-global my_rindex
 global rindex
 
 SECTION .text
@@ -7,7 +6,6 @@ SECTION .text
 ; char *rindex(const char *s, int c);
 ; rax rindex(rdi, rsi);
 
-my_rindex:
 rindex:
     XOR rax, rax ; set rax to 0
 	JMP loop ; Jump to the loop

@@ -1,6 +1,6 @@
 #include "../include/prototypes.h"
 
-Test(my_strstr, empty_needle)
+Test(my_strstr, empty_needle, .init = setup, .fini = teardown)
 {
     const char *haystack = "Hello, world!";
     const char *needle = "";
@@ -10,7 +10,7 @@ Test(my_strstr, empty_needle)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strstr, needle_greater_than_haystack)
+Test(my_strstr, needle_greater_than_haystack, .init = setup, .fini = teardown)
 {
     const char *haystack = "Hello";
     const char *needle = "Hello, world!";
@@ -20,7 +20,7 @@ Test(my_strstr, needle_greater_than_haystack)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strstr, needle_same_as_haystack)
+Test(my_strstr, needle_same_as_haystack, .init = setup, .fini = teardown)
 {
     const char *haystack = "Hello";
     const char *needle = "Hello";
@@ -30,7 +30,7 @@ Test(my_strstr, needle_same_as_haystack)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strstr, haystack_begins_with_needle)
+Test(my_strstr, haystack_begins_with_needle, .init = setup, .fini = teardown)
 {
     const char *haystack = "Hello, world!";
     const char *needle = "Hello";
@@ -40,7 +40,7 @@ Test(my_strstr, haystack_begins_with_needle)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strstr, haystack_ends_with_needle)
+Test(my_strstr, haystack_ends_with_needle, .init = setup, .fini = teardown)
 {
     const char *haystack = "Hello, world!";
     const char *needle = "world!";
@@ -50,7 +50,7 @@ Test(my_strstr, haystack_ends_with_needle)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strstr, needle_in_middle_of_haystack)
+Test(my_strstr, needle_in_middle_of_haystack, .init = setup, .fini = teardown)
 {
     const char *haystack = "Hello, world!";
     const char *needle = "world";
@@ -60,7 +60,7 @@ Test(my_strstr, needle_in_middle_of_haystack)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strstr, inexistant_needle)
+Test(my_strstr, inexistant_needle, .init = setup, .fini = teardown)
 {
     const char *haystack = "Hello, world!";
     const char *needle = "meow";

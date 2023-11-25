@@ -1,6 +1,6 @@
 #include "../include/prototypes.h"
 
-Test(my_strcasecmp, same_and_different_case)
+Test(my_strcasecmp, same_and_different_case, .init = setup, .fini = teardown)
 {
     const char *str1 = "Hello";
     const char *str2 = "hello";
@@ -10,7 +10,7 @@ Test(my_strcasecmp, same_and_different_case)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strcasecmp, different_and_different_case)
+Test(my_strcasecmp, different_and_different_case, .init = setup, .fini = teardown)
 {
     const char *str1 = "Bonjour";
     const char *str2 = "hello";
@@ -20,7 +20,7 @@ Test(my_strcasecmp, different_and_different_case)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strcasecmp, same_and_same_case)
+Test(my_strcasecmp, same_and_same_case, .init = setup, .fini = teardown)
 {
     const char *str1 = "Hello";
     const char *str2 = "Hello";
@@ -30,7 +30,7 @@ Test(my_strcasecmp, same_and_same_case)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strcasecmp, empty)
+Test(my_strcasecmp, empty, .init = setup, .fini = teardown)
 {
     const char *str1 = "";
     const char *str2 = "";
@@ -40,7 +40,7 @@ Test(my_strcasecmp, empty)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strcasecmp, empty_half)
+Test(my_strcasecmp, empty_half, .init = setup, .fini = teardown)
 {
     const char *str1 = "Hello";
     const char *str2 = "";

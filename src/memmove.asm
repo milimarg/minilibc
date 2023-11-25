@@ -1,5 +1,4 @@
 BITS 64
-global _memmove
 global memmove
 
 SECTION .text
@@ -7,7 +6,6 @@ SECTION .text
 ; void *memmove(void *dest, const void *src, size_t n);
 ; rax memmove(rdi, rsi, rdx);
 
-_memmove:
 memmove:
     MOV r10, r9 ; The initial pointer is saved
     MOV r11, rdx ; Save size to count values twice

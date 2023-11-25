@@ -7,13 +7,15 @@ SECTION .text
 ; char *strstr(const char *haystack, const char *needle);
 ; rax strstr(rdi, rsi);
 
+; const char *test = strstr("hello", "llo");
+
 my_strstr:
 strstr:
-    XOR rax, rax ; Set rax to 0
-	JMP loop ; Jump into the loop
+    XOR rax, rax
+    JMP loop
 
 loop:
-    CMP BYTE [rdi], 0 ; Compare if haystack pointer's value is equal to \0
+	CMP BYTE [rdi], 0 ; Compare if haystack pointer's value is equal to \0
     JE stop ; If yes, get out of the loop
     JMP .needle_init ; If not, jump to needle_init section
 
@@ -27,10 +29,10 @@ loop:
     JMP .needle_loop ; Jump to needle_loop
 
 .needle_loop:
-    CMP BYTE [r8], 0 ; Compare haystack pointer's value to \0
-    JE stop ; If yes, go to needle_exit
     CMP BYTE [r9], 0 ; Compare needle pointer's value to \0
     JE .needle_exit ; If yes, get out of the loop
+    CMP BYTE [r8], 0 ; Compare haystack pointer's value to \0
+    JE stop ; If yes, go to needle_exit
     MOV bl, [r8] ; Copy current haystack pointer's value into bl, to get directly the character value
     MOV cl, [r9] ; Copy current needle pointer's value into cl, to get directly the character value
     CMP bl, cl ; Compare both characters value

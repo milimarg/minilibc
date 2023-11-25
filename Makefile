@@ -17,7 +17,8 @@ SRC	=	src/strlen.asm \
 
 OBJ	=	$(SRC:.asm=.o)
 
-TESTS	=	tests/test_strlen.c \
+TESTS	=	tests/setup.c \
+			tests/test_strlen.c \
 			tests/test_memcpy.c \
 			tests/test_strchr.c \
 			tests/test_memset.c \
@@ -34,7 +35,7 @@ TESTS_NAME	=	unit_tests
 TESTS_OBJ	=	$(TESTS:.c=.o)
 
 all: $(patsubst %.asm, %.o, $(SRC))
-	$(CC) -shared -o $(NAME) -fPIC $(OBJ)
+	$(CC) -shared -o $(NAME) $(OBJ)
 
 %.o: %.asm
 	$(NASM) -f elf64 -o $@ $<
@@ -52,7 +53,7 @@ re: fclean all
 tests: $(NAME)
 
 $(NAME): $(TESTS_OBJ)
-	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion -L. -lasm
+	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion
 
 # type that for unit tests : export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 

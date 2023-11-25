@@ -1,6 +1,6 @@
 #include "../include/prototypes.h"
 
-Test(my_strncmp, compare_same_string)
+Test(my_strncmp, compare_same_string, .init = setup, .fini = teardown)
 {
     const char *s1 = "hello";
     const char *s2 = "hello";
@@ -10,7 +10,7 @@ Test(my_strncmp, compare_same_string)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strncmp, compare_empty_string)
+Test(my_strncmp, compare_empty_string, .init = setup, .fini = teardown)
 {
     const char *s1 = "a";
     const char *s2 = "a";
@@ -20,7 +20,7 @@ Test(my_strncmp, compare_empty_string)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strncmp, size_lower_than_str_len)
+Test(my_strncmp, size_lower_than_str_len, .init = setup, .fini = teardown)
 {
     const char *s1 = "hello";
     const char *s2 = "hello";
@@ -30,7 +30,7 @@ Test(my_strncmp, size_lower_than_str_len)
     cr_assert_eq(my_result, original_result);
 }
 
-Test(my_strncmp, size_greater_than_str_len)
+Test(my_strncmp, size_greater_than_str_len, .init = setup, .fini = teardown)
 {
     const char *s1 = "hello";
     const char *s2 = "hello";
