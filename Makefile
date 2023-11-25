@@ -1,4 +1,4 @@
-NASM	=	nasm -f macho64
+NASM	=	nasm
 CC	=	gcc
 NAME	=	libasm.so
 
@@ -8,35 +8,36 @@ SRC	=	src/strlen.asm \
 		src/memcpy.asm \
 		src/strcmp.asm \
 		src/strncmp.asm \
-		src/memmove.asm \
 		src/rindex.asm \
 		src/strstr.asm \
 		src/strpbrk.asm \
 		src/strcspn.asm \
 		src/strcasecmp.asm
+		#src/memmove.asm \
 
 OBJ	=	$(SRC:.asm=.o)
 
 TESTS	=	tests/test_strlen.c \
+			tests/test_memcpy.c \
 			tests/test_strchr.c \
 			tests/test_memset.c \
-			tests/test_memcpy.c \
 			tests/test_strcmp.c \
 			tests/test_strncmp.c \
 			tests/test_rindex.c \
 			tests/test_strstr.c \
-			tests/test_memmove.c \
-			tests/test_strpbrk.c
+			tests/test_strpbrk.c \
+			tests/test_strcasecmp.c \
+			tests/test_strcspn.c
+			#tests/test_memmove.c \
 
 TESTS_NAME	=	unit_tests
 TESTS_OBJ	=	$(TESTS:.c=.o)
-CFLAGS	=	-I/opt/homebrew/Cellar/criterion/2.4.1_3/include
 
 all: $(patsubst %.asm, %.o, $(SRC))
-	$(CC) -arch x86_64 -shared -o $(NAME) $(OBJ)
+	$(CC) -shared -o $(NAME) -fPIC $(OBJ)
 
 %.o: %.asm
-	$(NASM) $(ASFLAGS) -o $@ $<
+	$(NASM) -f elf64 -o $@ $<
 
 clean:
 	rm -f $(OBJ)
@@ -51,7 +52,7 @@ re: fclean all
 tests: $(NAME)
 
 $(NAME): $(TESTS_OBJ)
-	$(CC) -arch x86_64 -o $(TESTS_NAME) $(TESTS_OBJ) -L/opt/homebrew/Cellar/criterion/2.4.1_3/lib -lcriterion -L. -lasm
+	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion -L. -lasm
 
 # type that for unit tests : export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 

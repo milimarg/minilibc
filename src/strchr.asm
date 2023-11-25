@@ -1,5 +1,5 @@
 BITS 64
-global _strchr
+global my_strchr
 global strchr
 
 SECTION .text
@@ -7,17 +7,14 @@ SECTION .text
 ; char *strchr(const char *str, int c);
 ; rax strchr(rdi, rsi);
 
-_strchr:
+my_strchr:
 strchr:
-	JMP loop ; Jump to loop
-
-loop:
-    CMP BYTE [rdi], 0 ; Compare current pointer's value with 0
+	CMP BYTE [rdi], 0 ; Compare current pointer's value with 0
     JE stop ; If yes, get out of the loop
     CMP BYTE [rdi], sil ; Check if current pointer's value is equal to given character
     JE stop ; If yes, go to stop_found
     INC rdi ; Get to the next string pointer address
-    JMP loop ; Repeat the loop
+    JMP strchr ; Repeat the loop
 
 stop:
     MOV rax, rdi ; Return the current pointer

@@ -1,5 +1,5 @@
 BITS 64
-global _strlen
+global my_strlen
 global strlen
 
 SECTION .text
@@ -7,7 +7,7 @@ SECTION .text
 ; size_t strlen(const char *s);
 ; rax strlen(rdi);
 
-_strlen:
+my_strlen:
 strlen:
 	MOV rax, rdi ; The initial pointer is saved
 	JMP loop ; Jump to the loop

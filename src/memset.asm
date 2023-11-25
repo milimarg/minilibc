@@ -1,5 +1,5 @@
 BITS 64
-global _memset
+global my_memset
 global memset
 
 SECTION .text
@@ -7,7 +7,7 @@ SECTION .text
 ; void *memset(void *s, int c, size_t n);
 ; rax memset(rdi, rsi, rdx);
 
-_memset:
+my_memset:
 memset:
     PUSH rdi ; The initial pointer is saved
 	JMP loop ; Jump to the loop

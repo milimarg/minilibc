@@ -1,5 +1,5 @@
 BITS 64
-global _memcpy
+global my_memcpy
 global memcpy
 
 SECTION .text
@@ -7,7 +7,7 @@ SECTION .text
 ; void *memcpy(void *dest, const void *src, size_t n);
 ; rax memcpy(rdi, rsi, rdx);
 
-_memcpy:
+my_memcpy:
 memcpy:
     PUSH rdi ; The initial pointer is saved
 	JMP loop ; Jump to the loop

@@ -1,5 +1,5 @@
 BITS 64
-global _strcasecmp
+global my_strcasecmp
 global strcasecmp
 
 SECTION .text
@@ -7,7 +7,7 @@ SECTION .text
 ; int strcasecmp(const char *s1, const char *s2);
 ; rax strcasecmp(rdi, rsi);
 
-_strcasecmp:
+my_strcasecmp:
 strcasecmp:
     XOR rcx, rcx ; Set rcx to 0
     XOR r8, r8

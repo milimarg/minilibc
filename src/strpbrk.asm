@@ -1,5 +1,5 @@
 BITS 64
-global _strpbrk
+global my_strpbrk
 global strpbrk
 
 SECTION .text
@@ -7,7 +7,7 @@ SECTION .text
 ; char *strpbrk(const char *s, const char *charset);
 ; rax strpbrk(rdi, rsi);
 
-_strpbrk:
+my_strpbrk:
 strpbrk:
     MOV r8, rdi
 	JMP loop ; Jump to the loop
@@ -47,63 +47,3 @@ charset_exit:
 
 stop:
     RET
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;BITS 64
-;global _strpbrk
-;global strpbrk
-;
-;SECTION .text
-;
-;; char *strpbrk(const char *s, const char *charset);
-;; rax strpbrk(rdi, rsi);
-;
-;_strpbrk:
-;strpbrk:
-;    XOR rax, rax
-;    MOV r8, rdi
-;	JMP loop ; Jump to the loop
-;
-;loop:
-;    CMP BYTE [r8], 0 ; Compare if haystack pointer's value is equal to \0
-;    JE haystack_exit ; If yes, get out of the loop
-;    MOV r9, rsi ; If not, copy current charset pointer's address to r9
-;    JMP charset_loop ; Jump to charset_loop
-;
-;increment_rdi:
-;    INC r8
-;    JMP loop
-;
-;charset_loop:
-;    CMP BYTE [r8], 0 ; Compare haystack pointer's value to \0
-;    JE haystack_exit ; If yes, go to charset_exit
-;    CMP BYTE [r9], 0 ; Compare charset pointer's value to \0
-;    JE increment_rdi ; If yes, get out of the loop
-;    MOV bl, [r8] ; Copy current haystack pointer's value into bl, to get directly the character value
-;    MOV cl, [r9] ; Copy current charset pointer's value into cl, to get directly the character value
-;    CMP bl, cl ; Compare both characters value
-;    JE charset_exit ; If the same, jump to increment_rdi
-;    INC r9 ; And increment r9, which is the charset pointer
-;    JMP charset_loop ; Repeat the loop
-;
-;charset_exit:
-;    MOV rax, r8 ; Return pointer of the found substring
-;    JMP stop
-;
-;stop:
-;    RET

@@ -1,5 +1,5 @@
 BITS 64
-global _strstr
+global my_strstr
 global strstr
 
 SECTION .text
@@ -7,7 +7,7 @@ SECTION .text
 ; char *strstr(const char *haystack, const char *needle);
 ; rax strstr(rdi, rsi);
 
-_strstr:
+my_strstr:
 strstr:
     XOR rax, rax ; Set rax to 0
 	JMP loop ; Jump into the loop

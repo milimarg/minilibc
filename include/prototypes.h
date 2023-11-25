@@ -3,22 +3,20 @@
     #include <stdio.h>
     #include <string.h>
     #include <stdlib.h>
-    #include <dlfcn.h>
-    //#include <criterion/criterion.h>
-    #define LIBRARY_PATH "./libasm.so"
+    #include <criterion/criterion.h>
 
-size_t (*my_strlen)(char *str);
-char *(*my_strchr)(const char *str, int c);
-void *(*my_memset)(void *s, int c, size_t n);
-void *(*my_memcpy)(void *dest, const void *src, size_t n);
-int (*my_strcmp)(const char *s1, const char *s2);
-int (*my_strncmp)(const char *s1, const char *s2, size_t n);
-void *(*my_memmove)(void *dest, const void *src, size_t n);
-char *(*my_rindex)(const char *s, int c);
-char *(*my_strstr)(const char *haystack, const char *needle);
-char *(*my_strpbrk)(const char *s, const char *charset);
-size_t (*my_strcspn)(const char *s, const char *charset);
-int (*my_strcasecmp)(const char *s1, const char *s2);
-int (*my_strfry)(char *string);
+    size_t my_strlen(char *);
+    char *my_strchr(const char *, int);
+    void *my_memset(void *, int, size_t);
+    void *my_memcpy(void *, const void *, size_t);
+    int my_strcmp(const char *, const char *);
+    int my_strncmp(const char *, const char *, size_t);
+    void *my_memmove(void *, const void *, size_t);
+    char *my_rindex(const char *, int );
+    char *my_strstr(const char *, const char *);
+    char *my_strpbrk(const char *, const char *);
+    size_t my_strcspn(const char *, const char *);
+    int my_strcasecmp(const char *, const char *);
+    int my_strfry(char *);
 
 #endif /*MY_H_*/
