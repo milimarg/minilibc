@@ -1,5 +1,4 @@
 BITS 64
-global my_strcspn
 global strcspn
 
 extern strpbrk
@@ -9,7 +8,6 @@ SECTION .text
 ; size_t strcspn(const char *s, const char *charset);
 ; rax strcspn(rdi, rsi);
 
-my_strcspn:
 strcspn:
     MOV r8, rdi
 	JMP loop ; Jump to the loop

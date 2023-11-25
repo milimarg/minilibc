@@ -1,5 +1,4 @@
 BITS 64
-global my_strcasecmp
 global strcasecmp
 
 SECTION .text
@@ -7,7 +6,6 @@ SECTION .text
 ; int strcasecmp(const char *s1, const char *s2);
 ; rax strcasecmp(rdi, rsi);
 
-my_strcasecmp:
 strcasecmp:
     XOR rcx, rcx ; Set rcx to 0
     XOR r8, r8
@@ -28,6 +26,6 @@ loop:
     JMP loop ; Repeat the loop
 
 stop:
-    SUB r8b, r9b ; Subtract second to first pointer's value
-    MOVSX rax, r8b
+    SUB r8, r9 ; Subtract second to first pointer's value
+    MOV rax, r8
     RET ; Return subtracted value

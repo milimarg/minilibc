@@ -1,5 +1,4 @@
 BITS 64
-global my_strchr
 global strchr
 
 SECTION .text
@@ -7,7 +6,6 @@ SECTION .text
 ; char *strchr(const char *str, int c);
 ; rax strchr(rdi, rsi);
 
-my_strchr:
 strchr:
     MOV r8, rdi
     JMP loop

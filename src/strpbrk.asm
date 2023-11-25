@@ -1,5 +1,4 @@
 BITS 64
-global my_strpbrk
 global strpbrk
 
 SECTION .text
@@ -7,7 +6,6 @@ SECTION .text
 ; char *strpbrk(const char *s, const char *charset);
 ; rax strpbrk(rdi, rsi);
 
-my_strpbrk:
 strpbrk:
     MOV r8, rdi
 	JMP loop ; Jump to the loop

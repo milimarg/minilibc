@@ -44,8 +44,10 @@ Test(my_strcasecmp, empty_half, .init = setup, .fini = teardown)
 {
     const char *str1 = "Hello";
     const char *str2 = "";
-    int my_result = my_strcasecmp(str1, str2);
     int original_result = strcasecmp(str1, str2);
+    int my_result = my_strcasecmp(str1, str2);
+
+    printf("my = %c & original = %c\n", my_result, original_result);
 
     cr_assert_eq(my_result, original_result);
 }

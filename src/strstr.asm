@@ -1,5 +1,4 @@
 BITS 64
-global my_strstr
 global strstr
 
 SECTION .text
@@ -9,7 +8,6 @@ SECTION .text
 
 ; const char *test = strstr("hello", "llo");
 
-my_strstr:
 strstr:
     XOR rax, rax
     JMP loop
