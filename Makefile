@@ -12,8 +12,8 @@ SRC	=	src/strlen.asm \
 		src/strstr.asm \
 		src/strpbrk.asm \
 		src/strcspn.asm \
-		src/strcasecmp.asm
-		#src/memmove.asm \
+		src/strcasecmp.asm \
+		src/memmove.asm
 
 OBJ	=	$(SRC:.asm=.o)
 
@@ -28,8 +28,8 @@ TESTS	=	tests/setup.c \
 			tests/test_strstr.c \
 			tests/test_strpbrk.c \
 			tests/test_strcasecmp.c \
-			tests/test_strcspn.c
-			#tests/test_memmove.c \
+			tests/test_strcspn.c \
+			tests/test_memmove.c
 
 TESTS_NAME	=	unit_tests
 TESTS_OBJ	=	$(TESTS:.c=.o)

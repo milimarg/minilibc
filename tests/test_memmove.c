@@ -8,8 +8,7 @@ Test(my_memmove, move_empty_string)
 
     my_result = my_memmove(my_result, "", len);
     original_result = memmove(original_result, "", len);
-    for (int i = 0; i < len; i++)
-        cr_assert_eq(original_result[i], my_result[i]);
+    cr_assert_str_eq(original_result, my_result);
 }
 
 Test(my_memmove, move_filled_string)
