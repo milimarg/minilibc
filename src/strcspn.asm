@@ -1,8 +1,6 @@
 BITS 64
 global strcspn
 
-extern strpbrk
-
 SECTION .text
 
 ; size_t strcspn(const char *s, const char *charset);
@@ -10,24 +8,19 @@ SECTION .text
 
 strcspn:
     MOV r8, rdi
-	JMP loop ; Jump to the loop
-
-loop:
-    CMP BYTE [r8], 0 ; Compare if haystack pointer's value is equal to \0
-    JE haystack_exit ; If yes, get out of the loop
-    JMP charset_init ; If not, jump to charset_init section
+	JMP charset_init ; Jump to the loop
 
 increment_rdi:
     INC r8
-    JMP loop
+    JMP charset_init
 
 charset_init:
     MOV r9, rsi ; Copy current charset pointer's address to r9
-    JMP .charset_loop ; Jump to charset_loop
+    JMP charset_loop ; Jump to charset_loop
 
-.charset_loop:
+charset_loop:
     CMP BYTE [r8], 0 ; Compare haystack pointer's value to \0
-    JE haystack_exit ; If yes, go to charset_exit
+    JE charset_exit ; If yes, go to charset_exit
     CMP BYTE [r9], 0 ; Compare charset pointer's value to \0
     JE increment_rdi ; If yes, get out of the loop
     MOV bl, [r8] ; Copy current haystack pointer's value into bl, to get directly the character value
@@ -35,11 +28,7 @@ charset_init:
     CMP bl, cl ; Compare both characters value
     JE charset_exit ; If the same, jump to increment_rdi
     INC r9 ; And increment r9, which is the charset pointer
-    JMP .charset_loop ; Repeat the loop
-
-haystack_exit:
-    XOR rax, rax
-    JMP stop
+    JMP charset_loop ; Repeat the loop
 
 charset_exit:
     SUB r8, rdi
