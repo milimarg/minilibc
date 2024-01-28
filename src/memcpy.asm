@@ -8,6 +8,8 @@ SECTION .text
 
 memcpy:
     PUSH rdi ; The initial pointer is saved
+    PUSH rsi
+    PUSH rdx
 	JMP loop ; Jump to the loop
 
 loop:
@@ -21,6 +23,8 @@ loop:
     JMP loop ; Repeat the loop
 
 stop:
+    POP rdx
+    POP rsi
     POP rdi
     MOV rax, rdi ; return the earlier backed up pointer
     RET

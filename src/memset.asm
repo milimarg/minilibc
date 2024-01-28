@@ -8,6 +8,7 @@ SECTION .text
 
 memset:
     PUSH rdi ; The initial pointer is saved
+    PUSH rdx
 	JMP loop ; Jump to the loop
 
 loop:
@@ -19,6 +20,7 @@ loop:
     JMP loop ; Repeat the loop
 
 stop:
+    POP rdx
     POP rdi
     MOV rax, rdi ; return the earlier backed up pointer
     RET

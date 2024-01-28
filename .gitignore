@@ -5,3 +5,5 @@
 *.log
 unit_tests
 test
+*.html
+*.css

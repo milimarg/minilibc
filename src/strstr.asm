@@ -6,8 +6,6 @@ SECTION .text
 ; char *strstr(const char *haystack, const char *needle);
 ; rax strstr(rdi, rsi);
 
-; const char *test = strstr("hello", "llo");
-
 strstr:
     XOR rax, rax
     JMP loop

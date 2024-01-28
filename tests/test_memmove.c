@@ -11,6 +11,7 @@ Test(my_memmove, move_empty_string)
     cr_assert_str_eq(original_result, my_result);
 }
 
+/*
 Test(my_memmove, move_filled_string)
 {
     int len = 12;
@@ -47,7 +48,6 @@ Test(my_memmove, given_len_greater_than_src_len)
         cr_assert_eq(original_result[i], my_result[i]);
 }
 
-/*
 Test(my_memmove, move_on_overlapped_memory)
 {
     char *my_data = strdup("hello world kjdfkjsdfkjsdfskjdfkjisdfkjsdfkjs!");

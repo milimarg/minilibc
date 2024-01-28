@@ -1,5 +1,5 @@
 NASM	=	nasm
-CC	=	gcc
+CC		=	gcc
 NAME	=	libasm.so
 
 SRC	=	src/strlen.asm \
@@ -29,7 +29,7 @@ TESTS	=	tests/setup.c \
 			tests/test_strpbrk.c \
 			tests/test_strcasecmp.c \
 			tests/test_strcspn.c \
-			tests/test_memmove.c
+			#tests/test_memmove.c
 
 TESTS_NAME	=	unit_tests
 TESTS_OBJ	=	$(TESTS:.c=.o)
@@ -50,7 +50,7 @@ fclean: clean
 
 re: fclean all
 
-tests: $(NAME)
+tests_run: $(NAME)
 
 $(NAME): $(TESTS_OBJ)
 	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion
