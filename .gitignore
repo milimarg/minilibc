@@ -7,3 +7,5 @@ unit_tests
 test
 *.html
 *.css
+*.gcda
+*.gcno

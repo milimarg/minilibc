@@ -1,27 +1,33 @@
 BITS 64
-global strchr
 
 SECTION .text
+
+global strchr
+global index
 
 ; char *strchr(const char *str, int c);
 ; rax strchr(rdi, rsi);
 
+index:
 strchr:
-    MOV r8, rdi
-    JMP loop
+    PUSH rbp ; Save stack pointer
+    MOV rbp, rsp ; Set up prologue
+    MOV rax, rdi ; Backup the string input to return it at the end
+    JMP loop ; Go to main loop
 
 loop:
-	CMP BYTE [r8], 0 ; Compare current pointer's value with 0
-    JE not_found ; If yes, get out of the loop
-    CMP BYTE [r8], sil ; Check if current pointer's value is equal to given character
+    CMP BYTE [rax], sil ; Check if current pointer's value is equal to given character
     JE stop ; If yes, go to stop_found
-    INC r8 ; Get to the next string pointer address
+	CMP BYTE [rax], 0 ; Compare current pointer's value with 0
+    JE not_found ; If yes, get out of the loop
+    INC rax ; Get to the next string pointer address
     JMP loop ; Repeat the loop
 
 not_found:
-    XOR rax, rax
-    RET
+    XOR rax, rax ; set rax as 0 (so NULL in that C-style case) when no substring found
+    JMP stop
 
 stop:
-    MOV rax, r8 ; Return the current pointer
+    MOV rsp, rbp ; Set up epilogue
+    POP rbp ; Restore previously backed up stack pointer
 	RET

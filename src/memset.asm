@@ -7,8 +7,9 @@ SECTION .text
 ; rax memset(rdi, rsi, rdx);
 
 memset:
-    PUSH rdi ; The initial pointer is saved
-    PUSH rdx
+    PUSH rbp ; Save stack pointer
+    MOV rbp, rsp ; Set up prologue
+    MOV rax, rdi ; Backup the source pointer to return it at the end
 	JMP loop ; Jump to the loop
 
 loop:
@@ -20,7 +21,6 @@ loop:
     JMP loop ; Repeat the loop
 
 stop:
-    POP rdx
-    POP rdi
-    MOV rax, rdi ; return the earlier backed up pointer
+    MOV rsp, rbp ; Set up epilogue
+    POP rbp ; Restore previously backed up stack pointer
     RET

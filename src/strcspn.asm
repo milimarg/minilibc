@@ -7,23 +7,25 @@ SECTION .text
 ; rax strcspn(rdi, rsi);
 
 strcspn:
-    MOV r8, rdi
+    PUSH rbp ; Save stack pointer
+    MOV rbp, rsp ; Set up prologue
+    MOV rax, rdi ; Backup the string input
 	JMP charset_init ; Jump to the loop
 
 increment_rdi:
-    INC r8
-    JMP charset_init
+    INC rax ; Increment string index to compare the next char
+    JMP charset_init ; Go to charset_init, to update values
 
 charset_init:
     MOV r9, rsi ; Copy current charset pointer's address to r9
     JMP charset_loop ; Jump to charset_loop
 
 charset_loop:
-    CMP BYTE [r8], 0 ; Compare haystack pointer's value to \0
+    CMP BYTE [rax], 0 ; Compare haystack pointer's value to \0
     JE charset_exit ; If yes, go to charset_exit
     CMP BYTE [r9], 0 ; Compare charset pointer's value to \0
     JE increment_rdi ; If yes, get out of the loop
-    MOV bl, [r8] ; Copy current haystack pointer's value into bl, to get directly the character value
+    MOV bl, [rax] ; Copy current haystack pointer's value into bl, to get directly the character value
     MOV cl, [r9] ; Copy current charset pointer's value into cl, to get directly the character value
     CMP bl, cl ; Compare both characters value
     JE charset_exit ; If the same, jump to increment_rdi
@@ -31,9 +33,7 @@ charset_loop:
     JMP charset_loop ; Repeat the loop
 
 charset_exit:
-    SUB r8, rdi
-    MOV rax, r8
-    JMP stop
-
-stop:
+    SUB rax, rdi ; Get the length from start to a found char of charset in string input
+    MOV rsp, rbp ; Set up epilogue
+    POP rbp ; Restore previously backed up stack pointer
     RET

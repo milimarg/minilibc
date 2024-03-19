@@ -7,6 +7,8 @@ SECTION .text
 ; rax strncmp(rdi, rsi, rdx);
 
 strncmp:
+    PUSH rbp ; Save stack pointer
+    MOV rbp, rsp ; Set up prologue
     XOR rcx, rcx ; Set rcx to 0
     XOR r8, r8 ; Set r8 to 0
     XOR r9, r9 ; Set r9 to 0
@@ -28,4 +30,6 @@ loop:
 stop:
     SUB r8b, r9b ; Subtract second to first pointer's value
     MOVSX rax, r8b ; Return subtracted value
+    MOV rsp, rbp
+    POP rbp
     RET

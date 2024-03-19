@@ -69,3 +69,13 @@ Test(my_strstr, inexistant_needle, .init = setup, .fini = teardown)
 
     cr_assert_eq(my_result, original_result);
 }
+
+Test(my_strstr, empty_haystack_empty_needle, .init = setup, .fini = teardown)
+{
+    const char *haystack = "";
+    const char *needle = "";
+    char *my_result = my_strstr(haystack, needle);
+    char *original_result = strstr(haystack, needle);
+
+    cr_assert_str_eq(my_result, original_result);
+}

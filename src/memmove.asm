@@ -1,7 +1,5 @@
 BITS 64
-global memmove
-
-extern memcpy
+GLOBAL memmove
 
 SECTION .text
 
@@ -9,34 +7,35 @@ SECTION .text
 ; rax memmove(rdi, rsi, rdx);
 
 memmove:
-    XOR r10, r10
-    MOV rcx, rdx ; copy number of chars to copy
-    JMP loop_input_to_temp
+    PUSH rbp ; Save stack pointer
+    MOV rbp, rsp ; Set up prologue
+    MOV rax, rdi ; Save destination pointer
+    CMP rdi, rsi ; Check if source ptr is destination ptr
+    JE end ; If so, go directly to end
+    JB .replace ; If destination below source, go to replace label
+    JMP .set_up_once ; If destination greater than source, go to set_up_once label
 
-loop_input_to_temp:
-    CMP rdx, 0 ; Check if there are no characters to copy
-    JE test ; If yes, break out of the loop
-    MOV al, BYTE [rsi] ; Copy byte of current value pointer into al register, to get the value
-    MOV BYTE [r10], al ; Copy value into rdi register, to get its pointer and put it in the destination slot
-    INC rsi ; Get to the next destination pointer address
-    INC r10 ; Get to the next source pointer address
-    DEC rdx ; Decrement rdx to get the remaining number of values to copy
-    JMP loop_input_to_temp ; Repeat the loop
+.set_up_once:
+    MOV rcx, rsi ; Back up source in rcx, as temporary register
+    ADD rcx, rdx ; Add number of bytes to copy to temporary register
+    CMP rdi, rcx ; Check if destination is the same as rcx, so check if pointer overlap is the size of bytes to copy
+    JE .replace ; If it's equal, go to replace
+    JG .replace ; If it's greater, same thing
+    MOV rcx, rdx ; Move number of bytes to copy into temporary register (he's back!?)
+    DEC rdx ; Decrement number of bytes by one
+    ADD rdi, rdx ; Add that number to source...
+    ADD rsi, rdx ; ...and to destination
+    STD ; Invert read order for rep movsb
+    REP movsb ; Shortcut for a memcpy-like function
+    CLD ; Revert to the original read order
+    JMP end ; Go to end... because it's finished!
 
-test:
-    SUB r10, rcx
-    JMP loop_temp_to_output
+.replace:
+    MOV rcx, rdx ; Move number of bytes to copy into temporary register (he's back!?)
+    REP movsb ; Shortcut for a memcpy-like function
+    JMP end ; Go to end
 
-loop_temp_to_output:
-    CMP rcx, 0 ; Check if there are no characters to copy
-    JE stop ; If yes, break out of the loop
-    MOV al, BYTE [r10] ; Copy byte of current value pointer into al register, to get the value
-    MOV BYTE [rdi], al ; Copy value into rdi register, to get its pointer and put it in the destination slot
-    INC rdi ; Get to the next destination pointer address
-    INC r10 ; Get to the next source pointer address
-    DEC rcx ; Decrement rdx to get the remaining number of values to copy
-    JMP loop_temp_to_output ; Repeat the loop
-
-stop:
-    MOV rax, rdi
+end:
+    MOV rsp, rbp ; Set up epilogue
+    POP rbp ; Restore previously backed up stack pointer
     RET

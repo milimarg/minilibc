@@ -8,7 +8,7 @@ SRC	=	src/strlen.asm \
 		src/memcpy.asm \
 		src/strcmp.asm \
 		src/strncmp.asm \
-		src/rindex.asm \
+		src/strrchr.asm \
 		src/strstr.asm \
 		src/strpbrk.asm \
 		src/strcspn.asm \
@@ -24,18 +24,21 @@ TESTS	=	tests/setup.c \
 			tests/test_memset.c \
 			tests/test_strcmp.c \
 			tests/test_strncmp.c \
-			tests/test_rindex.c \
+			tests/test_strrchr.c \
 			tests/test_strstr.c \
 			tests/test_strpbrk.c \
 			tests/test_strcasecmp.c \
 			tests/test_strcspn.c \
-			#tests/test_memmove.c
+			tests/test_memmove.c \
+			src/dummy.c
 
 TESTS_NAME	=	unit_tests
 TESTS_OBJ	=	$(TESTS:.c=.o)
 
+CFLAGS	=	-Wall -Wextra -lcriterion --coverage
+
 all: $(patsubst %.asm, %.o, $(SRC))
-	$(CC) -shared -o $(NAME) $(OBJ)
+	ld -shared -o $(NAME) $(OBJ)
 
 %.o: %.asm
 	$(NASM) -f elf64 -o $@ $<
@@ -43,6 +46,8 @@ all: $(patsubst %.asm, %.o, $(SRC))
 clean:
 	rm -f $(OBJ)
 	rm -f $(TESTS_OBJ)
+	find . -name "*.gcda" -delete
+	find . -name "*.gcno" -delete
 
 fclean: clean
 	rm -f $(NAME)
@@ -50,10 +55,12 @@ fclean: clean
 
 re: fclean all
 
-tests_run: $(NAME)
+tests_run: all
+tests_run: $(TESTS_NAME)
 
-$(NAME): $(TESTS_OBJ)
-	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) -lcriterion
+$(TESTS_NAME): $(TESTS_OBJ)
+	$(CC) -o $(TESTS_NAME) $(TESTS_OBJ) $(CFLAGS)
+	./$(TESTS_NAME)
 
 # type that for unit tests : export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 

@@ -7,28 +7,25 @@ SECTION .text
 ; rax strstr(rdi, rsi);
 
 strstr:
-    XOR rax, rax
-    JMP loop
+    PUSH rbp ; Save stack pointer
+    MOV rbp, rsp ; Set up prologue
+    XOR rax, rax ; set rax as 0, so if no needle found in haystack, NULL (in a C-style way) will be returned
+    JMP loop ; Go to main loop
 
 loop:
-	CMP BYTE [rdi], 0 ; Compare if haystack pointer's value is equal to \0
-    JE stop ; If yes, get out of the loop
-    JMP .needle_init ; If not, jump to needle_init section
-
-.increment_rdi:
-    INC rdi
-    JMP loop
-
-.needle_init:
     MOV r8, rdi ; Copy current haystack pointer's address to r8
     MOV r9, rsi ; Copy current needle pointer's address to r9
     JMP .needle_loop ; Jump to needle_loop
+
+.increment_rdi:
+    INC rdi ; Go to the next char in haystack string
+    JMP loop ; Get back in the main loop
 
 .needle_loop:
     CMP BYTE [r9], 0 ; Compare needle pointer's value to \0
     JE .needle_exit ; If yes, get out of the loop
     CMP BYTE [r8], 0 ; Compare haystack pointer's value to \0
-    JE stop ; If yes, go to needle_exit
+    JE stop ; If yes, go to stop
     MOV bl, [r8] ; Copy current haystack pointer's value into bl, to get directly the character value
     MOV cl, [r9] ; Copy current needle pointer's value into cl, to get directly the character value
     CMP bl, cl ; Compare both characters value
@@ -39,7 +36,9 @@ loop:
 
 .needle_exit:
     MOV rax, rdi ; Return pointer of the found substring
-    JMP stop
+    JMP stop ; Go stop the program... because it's finished!
 
 stop:
+    MOV rsp, rbp ; Set up epilogue
+    POP rbp ; Restore previously backed up stack pointer
     RET

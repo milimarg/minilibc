@@ -4,17 +4,13 @@ NAME	=	libasm.so
 
 SRC	=	src/strlen.s \
 		src/memcpy.s \
-		src/memset.s \
-		src/rindex.s \
-		src/strstr.s
+		src/memset.s
 
 OBJ	=	$(SRC:.s=.o)
 
 TESTS	=	../../tests/test_strlen.c \
 		../../tests/test_memcpy.c \
-		../../tests/test_memset.c \
-		../../tests/test_rindex.c \
-		../../tests/test_strstr.c
+		../../tests/test_memset.c
 
 TESTS_NAME	=	unit_tests
 

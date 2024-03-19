@@ -7,6 +7,8 @@ SECTION .text
 ; rax strlen(rdi);
 
 strlen:
+    PUSH rbp ; Save stack pointer
+    MOV rbp, rsp ; Set up prologue
 	MOV rax, rdi ; The initial pointer is saved
 	JMP loop ; Jump to the loop
 
@@ -18,4 +20,6 @@ loop:
 
 stop:
     SUB rax, rdi ; Subtract pointer of last character with earlier backed up pointer, to get the string's length
+    MOV rsp, rbp
+    POP rbp
 	RET
